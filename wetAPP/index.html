@@ -8,7 +8,7 @@
 <!-- <script src="http://147.102.6.100:8080/target/target-script-min.js#anonymous"></script> -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
 <!-- <script type="text/javascript" src="http://crypto-js.googlecode.com/svn/tags/3.0/build/rollups/sha512.js"></script> -->
-<script type="text/javascript" src="./code/webinos.js"></script>
+<script type="text/javascript" src="../../../webinos.js"></script>
 <script type="text/javascript" src="code/jquery.MaxInput.js"></script>
 <script type="text/javascript" src="code/webinoscalls.js"></script>
 <script type="text/javascript" src="code/contacts.js"></script>
@@ -17,6 +17,7 @@
 <script type="text/javascript" src="code/listenRemoteInput.js"></script>
 <script type="text/javascript" src="code/vehicle.js"></script>
 <script type="text/javascript" src="code/tvManager.js"></script>
+
 <style>
 .three li{width: 33.3%;}
 .main li {width: 33.3%;}
@@ -60,9 +61,9 @@
 		width: 97.5%;
 	}
 }
-
 </style>
 </head>
+
 <body>
 <div id="globalmenu">
 	<ul class="main">
@@ -150,7 +151,7 @@ $(document).ready(function() {
 	$(window).bind('hashchange', function(){
 		var regex = /#([\w\-]+)/;
 		var hash = location.hash.match(regex);
-		console.log(hash);
+		console.log("hash:" + hash);
 		if (hash!=null && hash[1]) hash = hash[1];
 		else hash = "splash";
 		wetFramework.ActivateContent(hash);
