@@ -1,4 +1,4 @@
-function InitGUIForDemo2(){
+function InitGUI(){
 	
 	setTimeout(checkDeletion, 3000);
 	
@@ -67,13 +67,18 @@ TwitterHelper = {
 	isReady: false, // TODO: Check if service is ready before calling staff...
 	oAuthService: null,
 	init: function(message){
-		// Keep track of the local device address						
+        //new way to generate sessionID
+        sessionID = webinos.session.getPZPId();
+        console.log('----------SessionID:' + sessionID);
+        isAlreadyAuthenticated();
+        
+		/*// Keep track of the local device address						
 		webinos.ServiceDiscovery.findServices(new ServiceType('http://webinos.org/api/events'), {
 		  onFound: function (service) {
 			sessionID = service.myAppID.substring(0,service.myAppID.lastIndexOf('/'));
-			console.log(sessionID);
+			console.log('SessionID:' + sessionID);
 			isAlreadyAuthenticated();			
-		  }});															
+		  }});*/															
 	},
 	API: {
 // 		getUsersInfo: function(ids, userHandlerCB){
@@ -160,8 +165,8 @@ TwitterHelper = {
 					console.log('Error posting tweet:' + errorcode);
 					if (errorCB) errorCB(errorcode);
 				});
-		}
-	},
+        }
+    },
 	addContactToList: function(user){
 		$('ul#friendsList').append('<li><img src="' + user.profile_image_url + '\" width=\"40\" height=\"40\"/><label for=\"sample2\">'+user.name +'- @' + user.screen_name +'</label><input type=\"checkbox\" id=\"'+ '@' + user.screen_name +'\"></li>');
 	},
@@ -250,14 +255,10 @@ function isAlreadyAuthenticated(){
 		data: JSON.stringify({"sessionID": sessionID}),
 		dataType: 'json',
 
-		success: function (data) {
+		success: function (data) {		 
+		  console.log('isAlreadyAuthenticated:' + data);
 		  
-		  console.log("----------");
-		  console.log(data);
-		  console.log("----------");
-		  
-		    if(data == true){
-		      //alert(data);
+		    if(data == true){		      
 		      console.log("isAlreadyAuthenticated: " + data);
 		      TwitterHelper.getContacts();
 		      TwitterHelper.getTimeline();
@@ -336,5 +337,5 @@ $(document).ready(function(){
 	TwitterHelper.isReady = false;
 	webinos.session.addListener('registeredBrowser',TwitterHelper.init); 
 	// Init special things for demo2
-	InitGUIForDemo2();
+	InitGUI();
 });
