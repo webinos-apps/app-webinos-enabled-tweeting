@@ -168,7 +168,7 @@ TwitterHelper = {
         }
     },
 	addContactToList: function(user){
-		$('ul#friendsList').append('<li><img src="' + user.profile_image_url + '\" width=\"40\" height=\"40\"/><label for=\"sample2\">'+user.name +'- @' + user.screen_name +'</label><input type=\"checkbox\" id=\"'+ '@' + user.screen_name +'\"></li>');
+		$('ul#friendsList').append('<li><img src="' + user.profile_image_url + '\" width=\"48\" height=\"48\"/><label for=\"sample2\">'+user.name +' - <span>@' + user.screen_name +'</span></label><input type=\"checkbox\" id=\"'+ '@' + user.screen_name +'\"></li>');
 	},
 	getContacts: function() {
 

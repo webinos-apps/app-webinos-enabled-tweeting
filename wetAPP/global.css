@@ -1,3 +1,24 @@
+@font-face {
+    font-family: 'OpenSansRegular';
+    src: url('fonts/OpenSans-Regular-webfont.eot');
+    src: url('fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'OpenSansLight';
+    src: url('fonts/OpenSans-Light-webfont.eot');
+    src: url('fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/OpenSans-Light-webfont.woff') format('woff'),
+         url('fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 input {
 	-webkit-appearance:none;
 }
@@ -42,8 +63,13 @@ label, .label {
 }
 .radio label, .checkbox label {
 	display:inline-block;
-	line-height:32px;
+	line-height:48px;
 	float:left;
+	font-size: 1.5em;
+	font-weight: normal;
+}
+.radio label span, .checkbox label span {
+	color: #555;
 }
 .checkbox input, .radio input {
 	height:32px;
@@ -51,22 +77,21 @@ label, .label {
 	float:right;
 	border:0;
 	background-color:transparent;
-	background-image:url(./img/forms.png);
 	background-repeat:no-repeat;
-	margin-right:1%
 }
 .radio input {
-	background-position:left 0px;
-	border:0
+	background-image:url(./img/radio.png);
+	margin-top: 5px;
 }
 .radio input:checked {
-	background-position:left -32px
+	background-position:left -38px
 }
 .checkbox input {
-	background-position:left -64px;
+	background-image:url(./img/checkbox.png);
+	margin-top: 10px;
 }
 .checkbox input:checked {
-	background-position:left -96px
+	background-position:left -38px;
 }
 input[type="search"], input[type="text"], input[type="number"], input[type="tel"], input[type="url"], input[type="password"], textarea {
 	-webkit-border-radius:5px;
@@ -177,30 +202,29 @@ footer {
 }
 /* List Views */
 .list {
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-	background:#fff
+	font-family: 'OpenSansRegular';
+	color: #fff;
 }
 .list li {
-	font-weight:bold;
-	margin-bottom:0;
+	font-weight:normal;
 	overflow: hidden;
+	border-bottom: 1px dotted #000;
 }
-.list li + li {
-	border-top:1px solid #ccc
-}
+/*.list li + li {
+	border-top:1px solid #000
+}*/
 .list.checkbox li {
-	padding:10px 8px 10px 10px;
+	padding:10px;
 }
 .list a {
-	background: url(./img/list-arrow.png) no-repeat right center, -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fdfdfd), color-stop(100%, #eeeeee));
+	background: url(./img/list-arrow.png) no-repeat right center;
 	text-decoration:none;
-	color:#333;
+	color:#fff;
 	padding:15px 10px;
 	display: block;
 }
 .list p {
 	margin:.25em 0 0 0;
-	font-weight:normal;
 	font-size:.8em
 }
 .list img {
@@ -208,6 +232,40 @@ footer {
 	max-width:80px;
 	max-height:80px;
 	margin-right:10px
+}
+
+/*.icon-list {
+	background:#fff
+}*/
+.icon-list li {
+	margin:0;
+	padding:.5em 0;
+	color: #fff;
+	overflow: hidden;
+}
+.icon-list label, .icon-list a {
+	text-decoration:none;
+	padding-left:45px;
+	line-height:40px;
+	background-image:url(./img/icons-off.png);
+	background-repeat:no-repeat;
+}
+.icon-list a.disabled {
+	color:#999
+}
+
+.list-header {
+	 height: auto !important;
+}
+.list.checkbox .list-header {
+	padding: 0;
+}
+.list-header p {
+	font-size: 2.5em;
+	color: #0079ff;
+	font-weight: normal;
+	text-align: left;
+	padding: 10px;
 }
 /* Google Maps */
 #map-holder {

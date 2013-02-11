@@ -36,7 +36,7 @@ function postVehicleInfo(data) {
 			+ "I'm driving at the avg speed of "
 			+ data.averageSpeed1 + " km/h and I've driven for "
 			+ data.tripDistance
-			+ " kms, so far, with the average consumtion of "
+			+ " kms, so far, with the average consumption of "
 			+ data.averageConsumption1 + " l/100kms"
 		);
 	} else
@@ -66,11 +66,11 @@ VehicleHelper = {
 				//if(service.serviceAddress.indexOf("@car") == -1) return;
 				//else
 				$("ul#vehicledevicelist > li.removeIfFound").hide();
-				
+
 				VehicleHelper.availableServices[service.serviceAddress] = service;
 				console.log('recent vehicle API found: ' + service.api + ' @ ' + service.serviceAddress);
 				$('<li><label for="radio1" class="car">' + service.serviceAddress + '</label><input type="radio" name="vehicledevices" value="' + service.serviceAddress + '" /></li>').appendTo("ul#vehicledevicelist");
-				
+
 //				if (VehicleHelper.connectTo === service.serviceAddress) {
 //					GUI.showSuccess('Vehicle ' + VehicleHelper.connectTo + ' found. Binding..');
 //
@@ -120,9 +120,9 @@ VehicleHelper = {
 				})
 			}
 		}
-		
+
 	},
-	
+
 	onFoundService : [],
 	status : null
 }

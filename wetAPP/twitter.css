@@ -65,15 +65,9 @@ body {
 	position: relative; /*for the menu to stretch to the bottom*/
 	height: 100%;
 	overflow: hidden;
-	font-family:Helvetica, Arial, sans-serif;
+	font-family: 'OpenSansRegular', sans-serif;
 	font-size:15px;
 	-webkit-text-size-adjust: 100%;
-}
-.white {
-	background:#fff
-}
-footer {
-	min-height:42px
 }
 .splash {
 	text-align:center;
@@ -83,43 +77,13 @@ footer {
 	width:260px;
 	height:93px;
 	margin:0 auto 50px auto;
-	background:url(./img/splash.png) no-repeat;
+	background:url(./img/splash-w.png) no-repeat;
 	font-size: 0;
 }
 .splash h1 span {
 	visibility:hidden
 }
-.icon-list {
-	background:#fff
-}
-.icon-list li {
-	margin:0;
-	height:40px;
-	padding:.5em 0;
-	border-bottom:1px solid #666;
-}
-.icon-list label, .icon-list a {
-	text-decoration:none;
-	color:#000;
-	padding-left:45px;
-	line-height:40px;
-	background-image:url(./img/icons-off.png);
-	background-repeat:no-repeat;
-}
-.icon-list a.disabled {
-	color:#999
-}
-dt {
-	display:block;
-	float:left;
-	clear:both;
-	font-weight:bold;
-	margin:0 .25em .25em 0
-}
-dd {
-	display:block;
-	float:left;
-}
+
 .device {
 	line-height:100px;
 	padding-left:100px;
@@ -153,9 +117,6 @@ footer .checkbox label {
 	color:#ccc;
 	margin:1em
 }
-.date, .list a h3 span {
-	color:#666
-}
 
 /* background images */
 .main li a:before, #secondarymenu li a:before {
@@ -179,10 +140,6 @@ footer .checkbox label {
 #menutwitter:before {background-position: 50% -45px}
 /*#menuauthorize:before {background-position: 50% -175px}*/
 #menusettings:before {background-position: 50% -145px}
-#menucreate:hover:before {background-position: 50% 0px}
-#menutwitter:hover:before {background-position: 50% -45px}
-/*#menuauthorize:hover:before {background-position: 50% -175px}*/
-#menusettings:hover:before {background-position: 50% -145px}
 
 /* Icons */
 /*#secondarymenu a:before {
@@ -344,8 +301,16 @@ footer .checkbox label {
 	font-size: 85%;
 }
 #secondarymenu li a {
-	color: #0079c1;
 	display: table;
+}
+#secondarymenu.menucreate li a {
+	color: #8f0;
+}
+#secondarymenu.menutwitter li a {
+	color: #08f;
+}
+#secondarymenu.menusettings li a {
+	color: #f80;
 }
 .main li a span/*, #secondarymenu li a span*/ {
 	position: relative;
@@ -372,8 +337,8 @@ footer .checkbox label {
 	display: none;
 }
 
-.activeContent {
-	display: block !important;
+#content > .activeContent {
+	display: block;
 }
 
 #create {
@@ -420,9 +385,8 @@ footer .checkbox label {
 	box-shadow: none;
 }
 .jMax-text {
-	margin: 5px 5px 5px 10px;
-	font-weight: bold;
-	font-size: 24px;
+	margin: 5px;
+	font-size: 2em;
 	color: #fff;
 }
 .jMax-submit {
@@ -435,9 +399,11 @@ footer .checkbox label {
 	text-decoration: none;
 	border: none;
 	cursor: pointer;
-	background-color: #DFDFDF;
+	background: #08f;
 	font-size: 16px;
+	line-height: 40px;
 	color: #fff;
+	border-radius: 10px;
 }
 .jMax-submit input[type="submit"].disabled {
 	cursor: default;
@@ -445,18 +411,12 @@ footer .checkbox label {
 	background: #333;
 }
 .jMax-submit input[type="submit"].enabled:hover {
-	background-color: #ccc;
-	color: #fff;
+	background: #80f;
 }
 
 #splash img {
 	display: none;
 	margin: 4em auto 0;
-}
-
-#wetContactsTwitter .list p, #wetContactsWebinos .list p {
-	font-size: 1.5em;
-	color: #0079ff;
 }
 
 #timeline a {
@@ -469,18 +429,14 @@ footer .checkbox label {
 	padding-left: 55px;
 	padding-right: 20px;
 }
-
-.jMax-submit input[type="submit"] {
-	background: #5f9cbf; /* Old browsers */
-	background: -moz-linear-gradient(top, #5f9cbf 0%, #0079c1 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5f9cbf), color-stop(100%,#0079c1)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #5f9cbf 0%,#0079c1 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #5f9cbf 0%,#0079c1 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #5f9cbf 0%,#0079c1 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #5f9cbf 0%,#0079c1 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5f9cbf', endColorstr='#0079c1',GradientType=0 ); /* IE6-9 */
-	line-height: 40px;
-	border-radius: 10px;
+#timeline h3 {
+	color: #08f;
+}
+#timeline .date, .list a h3 span {
+	color: #666;
+}
+#timeline p {
+	color: #fff;
 }
 
 /*****************************************
@@ -495,7 +451,7 @@ footer .checkbox label {
 		margin: 0 auto;
 	}
 	#content {
-		padding: 0 0 0 400px;
+		padding: 0 0 0 350px;
 		border-right: 2px solid #0079C1;
 	}
 	.splash {
@@ -507,9 +463,8 @@ footer .checkbox label {
 	#globalmenu {
 		display: block;
 		position: absolute;
-		width: 400px;
-		background: rgba(0, 0, 0, 0.5);
-		min-height: 100%;
+		width: 330px;
+		height: 100%;
 		border-bottom: none;
 	}
 	.main {
@@ -517,7 +472,6 @@ footer .checkbox label {
 		border-right: 1px solid #666666;
 		background: #000;
 		min-height: 100%;
-		width: auto;
 		height: auto;
 		border-right: 2px solid #0079C1;
 		border-left: 2px solid #0079C1;
@@ -525,9 +479,9 @@ footer .checkbox label {
 	#secondarymenu {
 		display: block;
 		position: absolute;
-		top: 0;
-		left: 150px;
-		width: 250px; /*globalmenu.width - secondarymenu.left*/
+		top: 400px;
+		left: 0;
+		width: 335px; /*globalmenu.width - secondarymenu.left*/
 		height: auto;
 		border-top: none;
 		background: transparent;
@@ -548,57 +502,70 @@ footer .checkbox label {
 		height: 150px;
 	}
 	.main li a {
-		border-radius: 20px;
+		border-radius: 75px;
 		position: relative;
+		overflow: hidden;
+		font-size: 1em;
 	}
-	.main li a:hover {
-		background: #2d2d2d; /* Old browsers */
-		background: -moz-radial-gradient(center, ellipse cover, #2d2d2d 0%, #000000 100%); /* FF3.6+ */
-		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#2d2d2d), color-stop(100%,#000000)); /* Chrome,Safari4+ */
-		background: -webkit-radial-gradient(center, ellipse cover, #2d2d2d 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-radial-gradient(center, ellipse cover, #2d2d2d 0%,#000000 100%); /* Opera 12+ */
-		background: -ms-radial-gradient(center, ellipse cover, #2d2d2d 0%,#000000 100%); /* IE10+ */
-		background: radial-gradient(ellipse at center, #2d2d2d 0%,#000000 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d2d2d', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-	}
-	.main li .current {
-		color: #000;
-		background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#89ade2), color-stop(100%,#207ce5)); /* Chrome,Safari4+ */
-		background: -webkit-radial-gradient(center, ellipse cover, #89ade2 0%,#207ce5 100%); /* Chrome10+,Safari5.1+ */
-	}
+
+	#menucreate {background: #8f0}
+	#menutwitter {background: #08f}
+	#menusettings {background: #f80}
 	/* background images */
 	.main li a:before {
 	    height: 100px;
 	    z-index: -1;
-	    background-image: url(./img/menu.png);
+	    background-image: url(./img/menu-white.png);
+	    top: 10px;
 	}
 	.main li a:hover:before {
-		background-image: url(./img/menu-hover.png);
+		background-image: url(./img/menu-black.png);
+		opacity: 0.6;
 	}
 	#menucreate:before {background-position: 50% 20px}
-	#menutwitter:before {background-position: 50% -75px}
+	#menutwitter:before {background-position: 50% -72px}
 	/*#menuauthorize:before {background-position: 50% -175px}*/
 	#menusettings:before {background-position: 50% -270px}
-	#menucreate:hover:before {background-position: 50% 20px}
-	#menutwitter:hover:before {background-position: 50% -75px}
-	/*#menuauthorize:hover:before {background-position: 50% -175px}*/
-	#menusettings:hover:before {background-position: 50% -270px}
 	/* end */
 
 	.main li a, #secondarymenu li a {
-		color: #fff;
 		text-decoration: none;
 		text-align: center;
 		border: 1px solid #111;
 	}
 	.main li a span {
 		position: relative;
-		top: 120px;
+		top: 150px;
+		-webkit-transition: all 0.2s ease-in;
+		color: rgba(0,0,0,0.6);
+		font-weight: bold;
+		font-size: 85%;
+	}
+	.main li a:hover span {
+		top: 115px;
 	}
 
 	.main .logo {
 		display: block;
-		background: url(./img/splash130.png) 50% 50% no-repeat;
+		background: url(./img/splash130-w.png) 50% 50% no-repeat;
+		position: Absolute;
+		left: 10px;
+		top: 10px;
+	}
+	.menu-create {
+		position: absolute;
+		right: 10px;
+		top: 10px;
+	}
+	.menu-twitter {
+		position: absolute;
+		left: 10px;
+		top: 170px;
+	}
+	.menu-settings {
+		position: absolute;
+		right: 10px;
+		top: 170px;
 	}
 
 	#secondarymenu p {
@@ -612,36 +579,25 @@ footer .checkbox label {
 		border-top: 3px solid #111;
 	}
 	#secondarymenu ul {
-		margin: 0.5em;
+		margin: 1em;
 		width: auto;
 		position: static;
 		border-right: none;
 	}
 	#secondarymenu li {
-		margin: 0 0 0.3em 0;
+		margin: 0 0 0.5em 0.5em;
 		width: 100%;
 	}
-	#secondarymenu li a, .button, .jMax-submit input[type="submit"] {
-		background: #5f9cbf; /* Old browsers */
-		background: -moz-linear-gradient(top, #5f9cbf 0%, #0079c1 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5f9cbf), color-stop(100%,#0079c1)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top, #5f9cbf 0%,#0079c1 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top, #5f9cbf 0%,#0079c1 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top, #5f9cbf 0%,#0079c1 100%); /* IE10+ */
-		background: linear-gradient(to bottom, #5f9cbf 0%,#0079c1 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5f9cbf', endColorstr='#0079c1',GradientType=0 ); /* IE6-9 */
-		line-height: 40px;
-		border-radius: 10px;
+
+	#secondarymenu li a {
+		text-align: left;
+		background: none;
+		border: none;
+		font-family: 'OpenSansLight';
+		font-size: 2em;
 	}
-	#secondarymenu li a:hover, .button:hover {
-		background: #93bcd3; /* Old browsers */
-		background: -moz-linear-gradient(top, #93bcd3 0%, #29b1ff 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#93bcd3), color-stop(100%,#29b1ff)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top, #93bcd3 0%,#29b1ff 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top, #93bcd3 0%,#29b1ff 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top, #93bcd3 0%,#29b1ff 100%); /* IE10+ */
-		background: linear-gradient(to bottom, #93bcd3 0%,#29b1ff 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93bcd3', endColorstr='#29b1ff',GradientType=0 ); /* IE6-9 */
+	#secondarymenu li a:hover {
+		color: #fff;
 	}
 	#secondarymenu li a span {
 		position: static;
@@ -677,9 +633,6 @@ footer .checkbox label {
 		float: right;
 	}
 
-	#globalmenu, #secondarymenu {
-		height: 100%;
-	}
 	.main li {width: auto;}
 
 	.jMax textarea {

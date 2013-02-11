@@ -28,14 +28,17 @@ var wetFramework = {
 			if (page.contentFrom && this.linkMap[page.contentFrom]){
 				page.contentId = this.linkMap[page.contentFrom].contentId;
 			}
-			var $contentElm = $("#content > #"+page.contentId);
-			if ($contentElm.length){
+			var $contentElm = $("#"+page.contentId);
+			if ($contentElm.length > 0){
 				$contentElm.addClass("activeContent");
 			}else{
-				$("#content > #pageNotFound").text("Content here for "+page.label).addClass("activeContent");
+				$("#pageNotFound").text("Content here for "+page.label).addClass("activeContent");
 			}
 		}
 		var $secMenu = $("#secondarymenu");
+		if(page.root) {
+			$secMenu.attr("class",page.root);
+		}
 		if ($secMenu.html()=="" && page.parent && !page.btns){ // add btns at the secondary menu if the page loaded on an child page without btns.
 			var foundBtnsToAdd = false;
 			var parent = this.linkMap[page.parent];
@@ -92,14 +95,14 @@ var wetFramework = {
 		if (linksCount >=0 && linksCount <= classNames.length) className = classNames[linksCount];
 		return className;
 	},
+	//root is currently only for the css
 	linkMap: {
 		splash:{
 			name: "splash",
 			contentId: "splash",
-			btns: []
+			btns: [],
+			root: "splash"
 		},
-
-
 		menucreate:{
 			name: "menucreate",
 			label: "Create Tweet",
@@ -107,13 +110,15 @@ var wetFramework = {
 			btns: ["twitterBox", "createUsers", /*"createMedia",*/ "createVehicle", "createRemote"],
 			afterClick: function(){
 			      isAlreadyAuthenticated();
-			}
+			},
+			root: "menucreate"
 		},
 		twitterBox:{
 			name: "twitterBox",
 			label: "Twitter Box",
 			contentId: "create",
-			parent: "menucreate"
+			parent: "menucreate",
+			root: "menucreate"
 		},
 		createUsers:{
 			name: "createUsers",
@@ -121,19 +126,24 @@ var wetFramework = {
 			//contentId: "wetContacts",
 			//contentFrom: "twitterBox",
 			parent: "menucreate",
-			btns: ["createUsersDevice", "createUsersTwitter"]
+			btns: ["createUsersDevice", "createUsersTwitter"],
+			root: "menucreate"
 		},
 		createUsersDevice:{
 			name: "createUsersDevice",
 			label: "Webinos contacts",
 			contentId: "wetContactsWebinos",
-			parent: "createUsers",
+			parent: "menucreate",
+			btns: ["createUsersDevice", "createUsersTwitter"],
+			root: "menucreate"
 		},
 		createUsersTwitter:{
 			name: "createUsersTwitter",
 			label: "Twitter contacts",
 			contentId: "wetContactsTwitter",
-			parent: "createUsers",
+			parent: "menucreate",
+			btns: ["createUsersDevice", "createUsersTwitter"],
+			root: "menucreate"
 		},
 		createMedia:{
 			name: "createMedia",
@@ -143,26 +153,30 @@ var wetFramework = {
 			btns:[{
 				name: "btnClearTv",
 				label: "Clear Media"
-			}]
+			}],
+			root: "menucreate"
 		},
 		createVehicle:{
 			name: "createVehicle",
 			label: "Vehicle Info",
 			contentId: "wetVehicleInfo",
-			parent: "menucreate"
+			parent: "menucreate",
+			root: "menucreate"
 		},
 		createDevices:{
 			name: "createDevices",
 			label: "Contacts devices",
 			contentId: "implement_me",
-			parent: "menucreate"
+			parent: "menucreate",
+			root: "menucreate"
 		},
 		createRemote:{
 			name:"createRemote",
 			label: "Remote Twitter",
 			parent: "menucreate",
 			//contentFrom: "twitterBox",
-			btns:["createRemoteFind", "createRemoteListen"]
+			btns:["createRemoteFind", "createRemoteListen"],
+			root: "menucreate"
 		},
 		createRemoteFind:{
 			name: "createRemoteFind",
@@ -176,7 +190,8 @@ var wetFramework = {
 			afterClick:function(){
 				if(isAlreadyRemoted)
 					$("#btnRemoteInput").html("Stop remoting");
-			}
+			},
+			root: "menucreate"
 		},
 		createRemoteListen:{
 			name: "createRemoteListen",
@@ -190,7 +205,8 @@ var wetFramework = {
 			afterClick:function(){
 				if(isListening)
 					$("#btnListenRemoteInput").html("Stop remoting");
-			}
+			},
+			root: "menucreate"
 		},
 		menutwitter:{
 			name: "menutwitter",
@@ -199,7 +215,8 @@ var wetFramework = {
 			btns: ["timeline", "mentions", "messages"],
 			afterClick: function(){
 			      isAlreadyAuthenticated();
-			}
+			},
+			root: "menutwitter"
 		},
 		timeline:{
 			name: "timeline",
@@ -208,7 +225,8 @@ var wetFramework = {
 			afterClick: function(){
 				 $('ul#timeline').empty();
 				 TwitterHelper.getTimeline();
-			}
+			},
+			root: "menutwitter"
 		},
 		menusettings:{
 			name: "menusettings",
@@ -217,24 +235,27 @@ var wetFramework = {
 			btns: ["status", "logout"],
 			afterClick: function(){
 			      isAlreadyAuthenticated();
-			}
+			},
+			root: "menusettings"
 		},
 		status:{
 			name: "status",
-			label: "update status",
+			label: "Update status",
 			contentId: "splash",
 			afterClick: function(){
 			      $('#status_ko').css('display', 'none');
 			      isAlreadyAuthenticated();
-			}
+			},
+			root: "menusettings"
 		},
 		logout:{
 			name: "logout",
-			label: "logout",
+			label: "Logout",
 			contentId: "splash",
 			afterClick: function(){
 			      TwitterHelper.logout();
-			}
+			},
+			root: "menusettings"
 		}
 	}
 
