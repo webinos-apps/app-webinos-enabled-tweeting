@@ -87,6 +87,7 @@ var wetFramework = {
 		if (page.afterClick){
 			page.afterClick();
 		}
+		document.body.scrollTop = 0;
 	},
 	secondaryMenuItemClass: function(){
 		var classNames = ["unknown", "one","two","three","four","five"]

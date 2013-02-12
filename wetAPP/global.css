@@ -82,6 +82,7 @@ label, .label {
 .radio input {
 	background-image:url(./img/radio.png);
 	margin-top: 5px;
+	margin-right: 10px;
 }
 .radio input:checked {
 	background-position:left -38px

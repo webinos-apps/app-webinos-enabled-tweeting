@@ -66,8 +66,11 @@ body {
 	height: 100%;
 	overflow: hidden;
 	font-family: 'OpenSansRegular', sans-serif;
-	font-size:15px;
+	font-size:8px;
 	-webkit-text-size-adjust: 100%;
+}
+#timeline {
+	font-size: 13px;
 }
 .splash {
 	text-align:center;
@@ -118,6 +121,9 @@ footer .checkbox label {
 	margin:1em
 }
 
+#menucreate {color: #8f0}
+#menutwitter {color: #08f}
+#menusettings {color: #f80}
 /* background images */
 .main li a:before, #secondarymenu li a:before {
 	content: "";
@@ -298,7 +304,7 @@ footer .checkbox label {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	font-weight: normal;
-	font-size: 85%;
+	font-size: 1.5em;
 }
 #secondarymenu li a {
 	display: table;
@@ -431,6 +437,7 @@ footer .checkbox label {
 }
 #timeline h3 {
 	color: #08f;
+	margin-bottom: 0.2em;
 }
 #timeline .date, .list a h3 span {
 	color: #666;
@@ -449,6 +456,10 @@ footer .checkbox label {
 		/*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAANklEQVQYV2NkIAwkGQmokQTKP8enCKwAZAguRXAFuBShKMCmCEMBuiKsCpAV4VQAU4RXAUgRAKwrCCMlYC4oAAAAAElFTkSuQmCC), -webkit-gradient(linear, left top, right top, color-stop(0%, #999), color-stop(46%, white), color-stop(54%, white), color-stop(100%, #999));*/
 		width: 960px;
 		margin: 0 auto;
+		font-size: 15px;
+	}
+	#timeline {
+		font-size: 15px;
 	}
 	#content {
 		padding: 0 0 0 350px;
@@ -539,7 +550,7 @@ footer .checkbox label {
 		-webkit-transition: all 0.2s ease-in;
 		color: rgba(0,0,0,0.6);
 		font-weight: bold;
-		font-size: 85%;
+		font-size: 0.9em;
 	}
 	.main li a:hover span {
 		top: 115px;
