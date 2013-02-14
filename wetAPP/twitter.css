@@ -226,9 +226,20 @@ footer .checkbox label {
 
 #content {
 	background: #111 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQYlWNgIAJISUn9H1VET0UMDAwAX18NA9PnsUEAAAAASUVORK5CYII=);
-	padding: 62px 0;
 	height: 100%;
 	overflow: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#content > div {
+	display: none;
+	padding: 62px 0;
+}
+
+#content > .activeContent {
+	display: block;
 }
 
 #globalmenu, #secondarymenu {
@@ -339,33 +350,20 @@ footer .checkbox label {
 	background: #000;
 }
 
-#content > div {
-	display: none;
-}
-
-#content > .activeContent {
-	display: block;
-}
-
 #create {
-	height: 220px;
 	margin: 10px;
+	overflow: hidden;
 }
 
 .jMax {
 	width: 100%;
 }
-.jMax textarea {
-	width: 99.5%;
-	resize: none;
-	height: 5.5em;
-}
 
 .jMax textarea {
+	resize: none;
 	border: 2px solid #ccc;
 	-moz-border-radius: 20px;
 	-webkit-border-radius: 20px;
-	-khtml-border-radius: 20px;
 	border-radius: 20px;
 	background-color: #fff;
 	font-family: Arial;
@@ -382,6 +380,7 @@ footer .checkbox label {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	clear: left;
 }
 .jMax textarea:focus {
 	outline: none;
@@ -397,7 +396,6 @@ footer .checkbox label {
 }
 .jMax-submit {
 	margin: 5px 5px 5px 10px;
-	height: 25px;
 	overflow: visible;
 }
 .jMax-submit input[type="submit"] {
@@ -407,9 +405,9 @@ footer .checkbox label {
 	cursor: pointer;
 	background: #08f;
 	font-size: 16px;
-	line-height: 40px;
 	color: #fff;
 	border-radius: 10px;
+	height: 40px;
 }
 .jMax-submit input[type="submit"].disabled {
 	cursor: default;
@@ -548,6 +546,9 @@ footer .checkbox label {
 		position: relative;
 		top: 150px;
 		-webkit-transition: all 0.2s ease-in;
+		-moz-transition: all 0.2s ease-in;
+		-o-transition: all 0.2s ease-in;
+		transition: all 0.2s ease-in;
 		color: rgba(0,0,0,0.6);
 		font-weight: bold;
 		font-size: 0.9em;
