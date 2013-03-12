@@ -68,7 +68,10 @@ TwitterHelper = {
 	oAuthService: null,
 	init: function(message){
         //new way to generate sessionID
-        sessionID = webinos.session.getPZPId();
+        console.log(message);
+        console.log(webinos.session.getPZPId());
+        console.log(cleanSessionID(webinos.session.getPZPId()));
+        sessionID = cleanSessionID(webinos.session.getPZPId());
         console.log('----------SessionID:' + sessionID);
         isAlreadyAuthenticated();
 
@@ -330,6 +333,15 @@ function checkDeletion(){
 	setTimeout(checkDeletion, 500);
 }
 
+function cleanSessionID(id){
+    id = id.replace(/\s/g,'_');
+    id = id.replace(/\%20/g,'_');
+    id = id.replace(/\'/g,'');
+    id = id.replace(/\(/g,'');
+    id = id.replace(/\)/g,'');
+
+    return id;
+}
 
 //When the document loads
 $(document).ready(function(){
