@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns       = "http://www.w3.org/ns/widgets"
         id          = "http://webinos.org/demo/webinos-enabled-twitting"
-        version     = "0.1"
-        height      = "400"
-        width       = "400"
-        viewmodes   = "fullscreen">
+        version     = "0.2"
+        height      = "800"
+        width       = "480"
+        viewmodes   = "fullscreen"> 
  
   <name short="W.E.T. app Widget">
     Webinos Enabled Tweeting Demo
@@ -14,7 +14,7 @@
     Webinos Enabled Tweeting Widget
   </description>
 
-  <author href  = "http://webinos.org/">The Webinos project (Paolo Vergori, Michele Morello, ISMB)</author>
+  <author href="http://developer.webinos.org/">The Webinos project (Paolo Vergori, Michele Morello, ISMB)</author>
 
   <content src="index.html"/>
   
@@ -36,3 +36,4 @@
 	limitations under the License.
   </license>
 </widget>
+
