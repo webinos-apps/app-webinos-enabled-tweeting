@@ -12,7 +12,7 @@
     var isAndroid = ua.indexOf("android") > -1;
     var head = document.getElementsByTagName('head').item(0);
     var webinosJS = document.createElement("script");
-    webinosJS.setAttribute("src", "webinos.js");
+    webinosJS.setAttribute("src", "http://localhost:8080/webinos.js");
     webinosJS.setAttribute("type","text/javascript");
     webinosJS.setAttribute("onload", "webinosLoaded()");
 
