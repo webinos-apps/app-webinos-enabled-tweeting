@@ -68,11 +68,8 @@ TwitterHelper = {
 	oAuthService: null,
 	init: function(message){
         //new way to generate sessionID
-        console.log(message);
-        console.log(webinos.session.getPZPId());
-        console.log(cleanSessionID(webinos.session.getPZPId()));
         sessionID = cleanSessionID(webinos.session.getPZPId());
-        console.log('----------SessionID:' + sessionID);
+        console.log('----------SessionID:' + webinos.session.getPZPId());
         isAlreadyAuthenticated();
 
 		/*// Keep track of the local device address
@@ -347,7 +344,7 @@ function cleanSessionID(id){
 $(document).ready(function(){
 	// When the browser registers, initialize the service
 	TwitterHelper.isReady = false;
-	webinos.session.addListener('registeredBrowser',TwitterHelper.init);
+	webinos.session.addListener('registeredBrowser',TwitterHelper.init());
 	// Init special things for demo2
 	InitGUI();
 });

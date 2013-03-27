@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.body.onload = function() {
 	$(window).bind('hashchange', function(){
 		var regex = /#([\w\-]+)/;
 		var hash = location.hash.match(regex);
@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$("#secondarymenu").on("click", "#btnClearTv", function(event){
 		removeTvInput(true);
 	});
-});
+};
 
 var wetFramework = {
 	currentPage : null,
