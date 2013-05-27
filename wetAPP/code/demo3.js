@@ -142,7 +142,8 @@ TwitterHelper = {
 			var body = "";
 			var nl = "\r\n";
 
-			body += "--CbotRul3z"+nl;
+// 			body += "--CbotRul3z"+nl;
+            body += "--webinosRul3z"+nl;
 			//media[] as described in API doesn't work!
 			//Using media_data instead based on http://stackoverflow.com/questions/7316776/twitters-statuses-update-with-media-on-ios-returns-500-error
 			body += 'Content-Disposition: form-data; name="media_data[]"; filename="'+imageName+'"'+nl;
@@ -291,8 +292,11 @@ function isAlreadyAuthenticated(){
 		      });
 		    }
 		},
-		error: function (data) {
+        error: function (data) {
+            alert("Error: failed to load resource 130.192.85.173. Server not available. Aborting");
 		    console.log('IsAlreadyAuthenticate Error: ' + JSON.stringify(data));
+            window.open('', '_self', '');
+            window.close();
 		}
 	});
   }
