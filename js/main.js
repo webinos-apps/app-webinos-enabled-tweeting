@@ -67,16 +67,9 @@ TwitterHelper = {
 	isReady: false, // TODO: Check if service is ready before calling staff...
 	oAuthService: null,
 	init: function(message){
-        console.log("---");
-        console.log(JSON.stringify(webinos));
-        console.log("---");
         //new way to generate sessionID
-//         if(!isAndroid){
-            sessionID = cleanSessionID(webinos.session.getPZPId());
-            console.log('----------SessionID:' + webinos.session.getPZPId());
-//         }
-//         else
-//             sessionID = webinos.session.getPZPId();
+        sessionID = cleanSessionID(webinos.session.getPZPId());
+        console.log('-->SessionID:' + webinos.session.getPZPId());
         isAlreadyAuthenticated();
 	},
 	API: {
@@ -275,10 +268,29 @@ function isAlreadyAuthenticated(){
                 success: function (data) {
                     if(data){                        
                         console.log("devServer<authURL> " + data.authURL);
-                        if(isAndroid)
-                            alert("window.open not suppot in android WRT. Open this link in the browser to authenticate: " + data.authURL);
-                        else
-                            window.open(data.authURL);
+                        //TODO: this does not work. Android WRT checks that localhost is in the link and chop off question marks...
+                        if(isAndroid){                            
+                            console.log("window.open not suppot in android WRT. Opening link in a browser: " + data.authURL);                            
+                            data.authURL += "&localhost";
+                            webinos.discovery.findServices(new ServiceType('http://webinos.org/api/applauncher'), {
+                                onFound: function(service){
+                                    if(service.serviceAddress === webinos.session.getPZPId()){
+                                        service.bindService({
+                                            onBind: function(service){                                                                                                                                                
+                                                service.launchApplication(function(){
+                                                    console.log("SuccessCB: url opened");                                                   
+                                                },function(){console.log("ErrorCB: url failed to open");},                                                                                                                          
+                                                data.authURL);
+                                            }
+                                        });        
+                                    }
+                                    
+                                }
+                            }); 
+                        }
+                        else{
+                            window.open(data.authURL);                            
+                        }
                     }
                     else{
                         console.log('Error: no URL recived');

@@ -7,7 +7,6 @@
 <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0,width=device-width" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
 <script type="text/javascript">
-alert("111");
 
     var ua = navigator.userAgent.toLowerCase();
     var isAndroid = ua.indexOf("android") > -1;
@@ -20,14 +19,18 @@ alert("111");
     webinosJS.setAttribute("onerror", "webinosError()");
 
     if(isAndroid) {
-        var script = document.createElement("script");
-        script.src = "webinossocket.js";
-        script.type = 'text/javascript';
-        head.appendChild(script);   
-        
-        script.onload = function () {
-            head.appendChild(webinosJS);
-        } 
+        if(!window.WebSocket && !window.MozWebSocket){
+            var script = document.createElement("script");
+            script.src = "webinossocket.js";
+            script.type = 'text/javascript';
+            webinosJS.setAttribute("src", "/webinos.js");
+            head.appendChild(script);   
+
+            script.onload = function () {
+                head.appendChild(webinosJS);
+            }
+        }
+        head.appendChild(webinosJS);          
     }
     else { 
         if(typeof(webinos) !== 'undefined')
@@ -52,7 +55,6 @@ alert("111");
     }
 
     function webinosLoaded() {
-//window.open("http://www.google.it", '_new');
         var script = document.createElement("script");
         script.setAttribute("src", "js/checkWebinosVersion.js");
         script.setAttribute("type","text/javascript");
