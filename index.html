@@ -2,11 +2,13 @@
 <html>
 <head>
 <title>Twitter</title>
-<link rel="stylesheet" href="global.css">
-<link rel="stylesheet" href="twitter.css">
+<link rel="stylesheet" href="./css/global.css">
+<link rel="stylesheet" href="./css/twitter.css">
 <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0,width=device-width" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
 <script type="text/javascript">
+alert("111");
+
     var ua = navigator.userAgent.toLowerCase();
     var isAndroid = ua.indexOf("android") > -1;
     var head = document.getElementsByTagName('head').item(0);
@@ -27,17 +29,21 @@
             head.appendChild(webinosJS);
         } 
     }
-    else {        
-        if(!UrlExists(webinosJS.src))
-            webinosJS.setAttribute("src", "http://localhost:8080/client/webinos.js");
-        head.appendChild(webinosJS);
+    else { 
+        if(typeof(webinos) !== 'undefined')
+            webinosLoaded();
+        else {
+            if(!UrlExists(webinosJS.src))
+                webinosJS.setAttribute("src", "http://localhost:8080/client/webinos.js");                                    
+            head.appendChild(webinosJS);
+        }
     }
 
     function UrlExists(url) {
-    var http = new XMLHttpRequest();
-    http.open('HEAD', url, false);
-    http.send();
-    return http.status!=404;
+        var http = new XMLHttpRequest();
+        http.open('HEAD', url, false);
+        http.send();
+        return http.status!=404;
     }
 
     function webinosError(){
@@ -46,62 +52,63 @@
     }
 
     function webinosLoaded() {
+//window.open("http://www.google.it", '_new');
         var script = document.createElement("script");
-        script.setAttribute("src", "code/checkWebinosVersion.js");
+        script.setAttribute("src", "js/checkWebinosVersion.js");
         script.setAttribute("type","text/javascript");
         head.appendChild(script);
         script.onload = function(){
 
             script = document.createElement("script");
-            script.setAttribute("src", "code/jquery.MaxInput.js");
+            script.setAttribute("src", "js/jquery.MaxInput.js");
             script.setAttribute("type","text/javascript");
             head.appendChild(script);
             script.onload = function(){
             
                 script = document.createElement("script");
-                script.setAttribute("src", "code/webinoscalls.js")
+                script.setAttribute("src", "js/webinoscalls.js")
                 script.setAttribute("type","text/javascript");
                 head.appendChild(script);
                 script.onload = function(){
                 
                     script = document.createElement("script");
-                    script.setAttribute("src", "code/contacts.js");
+                    script.setAttribute("src", "js/contacts.js");
                     script.setAttribute("type","text/javascript");
                     head.appendChild(script);
                     script.onload = function(){
                     
                         script = document.createElement("script");
-                        script.setAttribute("src", "code/demo3.js");
+                        script.setAttribute("src", "js/main.js");
                         script.setAttribute("type","text/javascript");
                         head.appendChild(script);
                         script.onload = function(){
                         
                             script = document.createElement("script");
-                            script.setAttribute("src", "code/remoteInput.js");
+                            script.setAttribute("src", "js/remoteInput.js");
                             script.setAttribute("type","text/javascript");
                             head.appendChild(script);
                             script.onload = function(){
                             
                                 script = document.createElement("script");
-                                script.setAttribute("src", "code/listenRemoteInput.js");
+                                script.setAttribute("src", "js/listenRemoteInput.js");
                                 script.setAttribute("type","text/javascript");
                                 head.appendChild(script);
                                 script.onload = function(){
                                     
                                     script = document.createElement("script");
-                                    script.setAttribute("src", "code/vehicle.js");
+                                    script.setAttribute("src", "js/vehicle.js");
                                     script.setAttribute("type","text/javascript");
                                     head.appendChild(script);
                                     script.onload = function(){
                                         
                                         script = document.createElement("script");
-                                        script.setAttribute("src", "code/tvManager.js");
+                                        script.setAttribute("src", "js/tvManager.js");
                                         script.setAttribute("type","text/javascript");
                                         head.appendChild(script);
                                         script.onload = function(){
                                             
                                             script = document.createElement("script");
-                                            script.setAttribute("src", "code/UIframework.js");
+                                            script.setAttribute("src", "js/UIframework.js");
                                             script.setAttribute("type","text/javascript");
                                             head.appendChild(script);
                                         }
@@ -115,26 +122,6 @@
         }
     }
 </script>
-<!--
-<script type="text/javascript" src="../../webinos.js"></script>
--->
-<!---------------------WORKAROUND FOR WRT, DOESN'T WORK ON BROWSERS---------------------->
-<!--
-<script type="text/javascript" src="webinossocket.js"></script>
-<script type="text/javascript" src="webinos.js"></script>
--->
-<!--------------------------------------------------------------------------------------->
-<!--
-<script type="text/javascript" src="code/jquery.MaxInput.js"></script>
-<script type="text/javascript" src="code/webinoscalls.js"></script>
-<script type="text/javascript" src="code/contacts.js"></script>
-<script type="text/javascript" src="code/demo3.js"></script>
-<script type="text/javascript" src="code/remoteInput.js"></script>
-<script type="text/javascript" src="code/listenRemoteInput.js"></script>
-<script type="text/javascript" src="code/vehicle.js"></script>
-<script type="text/javascript" src="code/tvManager.js"></script>
-<script type="text/javascript" src="code/UIframework.js"></script>
--->
 </head>
 
 <body>
