@@ -54,7 +54,10 @@
 					obj.append(_jMaxtextarea).append(_jMaxtext).append(_jMaxsubmit);
 				else
 					obj.append(_jMaxtext).append(_jMaxtextarea).append(_jMaxsubmit);
-
+				
+//				_jMaxinput.click(function(e){
+//					alert(jQuery.trim(_jMaxtextarea.val()));
+//				})
 				if(o.showtext)
 					$(document.createElement('span')).html(' '+o.message).insertAfter(_jMaxtext.find('span:first'));
 					

@@ -1,3 +1,22 @@
+/*******************************************************************************
+ *  Code contributed to the webinos project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Copyright 2013 EPU-National Technical University of Athens
+ * Author: Paolo Vergori (ISMB), Michele Morello (ISMB), Christos Botsikas (NTUA)
+ ******************************************************************************/
+
 function InitGUI(){
 
 	setTimeout(checkDeletion, 3000);
@@ -14,7 +33,7 @@ function InitGUI(){
 			TwitterHelper.API.tweetMessage(
 				$('#tbox').find("textarea").val(),
 				function(){GUI.showSuccess('Tweet message successful'); $('#tbox').find("textarea").val('');},
-				function(){GUI.showError('Tweet message unsuccessful'); alert("error");}
+				function(){GUI.showError('Tweet message unsuccessful');}
 			);
 		}else{
 			// Tweet Message with media
@@ -255,6 +274,7 @@ function isAlreadyAuthenticated(){
 		      TwitterHelper.isReady = true;
 		      $('#status').css('display', 'block');
 		      $('#status_ko').css('display', 'none');
+              $("#authURL").css('display', 'none');
 		    }
 		    else{
 
@@ -267,34 +287,38 @@ function isAlreadyAuthenticated(){
 
                 success: function (data) {
                     if(data){                        
-                        console.log("devServer<authURL> " + data.authURL);
-                        //TODO: this does not work. Android WRT checks that localhost is in the link and chop off question marks...
+                        console.log("devServer<authURL> " + data.authURL);                        
                         if(isAndroid){                            
-                            console.log("window.open not suppot in android WRT. Opening link in a browser: " + data.authURL);                            
-                            data.authURL += "&localhost";
-                            webinos.discovery.findServices(new ServiceType('http://webinos.org/api/applauncher'), {
-                                onFound: function(service){
-                                    if(service.serviceAddress === webinos.session.getPZPId()){
-                                        service.bindService({
-                                            onBind: function(service){                                                                                                                                                
-                                                service.launchApplication(function(){
-                                                    console.log("SuccessCB: url opened");                                                   
-                                                },function(){console.log("ErrorCB: url failed to open");},                                                                                                                          
-                                                data.authURL);
-                                            }
-                                        });        
-                                    }
-                                    
-                                }
-                            }); 
+// TODO: this does not work. Android WRT checks that localhost is in the link and chop off question marks...
+//                             console.log("window.open not suppot in android WRT. Opening link in a browser: " + data.authURL);                            
+//                             data.authURL += "&localhost";
+//                             webinos.discovery.findServices(new ServiceType('http://webinos.org/api/applauncher'), {
+//                                 onFound: function(service){
+//                                     if(service.serviceAddress === webinos.session.getPZPId()){
+//                                         service.bindService({
+//                                             onBind: function(service){                                                                                                                                                
+//                                                 service.launchApplication(function(){
+//                                                     console.log("SuccessCB: url opened");                                                   
+//                                                 },function(){console.log("ErrorCB: url failed to open");},                                                                                                                          
+//                                                 data.authURL);
+//                                             }
+//                                         });        
+//                                     }
+//                                     
+//                                 }
+//                             }); 
+                            $("#authMessage").html("Cannot open a window in android WRT. Please, open this link in a browser and authenticate: ");
+                            console.log("STO 0!!!!!!!!!!!!!!!");
+                            $("#authURL").attr('href', data.authURL);
+                            console.log("STO CAZZO!!!!!!!!!!!!!!!");
                         }
                         else{
-                            window.open(data.authURL);                            
+                            window.open(data.authURL);      
                         }
                     }
                     else{
                         console.log('Error: no URL recived');
-                        alert("Server error!");
+                        if(!isAndroid) alert("Server error!");
                     }
                 },
                 error: function (data) {
@@ -304,7 +328,7 @@ function isAlreadyAuthenticated(){
 		    }
 		},
         error: function (data) {
-            alert("Error: failed to load resource 130.192.85.173. Server not available. Aborting");
+            if(!isAndroid) alert("Error: failed to load resource 130.192.85.173. Server not available. Aborting");
 		    console.log('IsAlreadyAuthenticate Error: ' + JSON.stringify(data));
             window.open('', '_self', '');
             window.close();

@@ -59,7 +59,7 @@ function postVehicleInfo(data) {
 			+ data.averageConsumption1 + " l/100kms"
 		);
 	} else
-		if(!isAndroid) alert("Vehicle information won't be added. Too few characters left.");
+		alert("Vehicle information won't be added. Too few characters left.");
 
 	var e = jQuery.Event("keydown");
 	e.which = 50;
@@ -101,7 +101,7 @@ VehicleHelper = {
 //								console.log(VehicleHelper.bindService);
 //
 //								service.get("tripcomputer", postVehicleInfo, function() {
-//											if(!isAndroid) alert("Error!");
+//											alert("Error!");
 //										});
 //							} else GUI.showError('Vehicle cannont bind to ' + VehicleHelper.connectTo);
 //						}
@@ -119,7 +119,7 @@ VehicleHelper = {
 			var boundService = VehicleHelper.serviceBindings[VehicleHelper.connectTo];
 			if (boundService!=null){
 				service.get("tripcomputer", postVehicleInfo, function() {
-					if(!isAndroid) alert("Error!");
+					alert("Error!");
 				});
 			}else{
 				service.bindService({
@@ -129,10 +129,10 @@ VehicleHelper = {
 							console.log('Vehicle bound to' + VehicleHelper.connectTo);
 							console.log(boundService);
 							service.get("tripcomputer", postVehicleInfo, function() {
-								if(!isAndroid) alert("Error!");
+								alert("Error!");
 							});
 						}else{
-							if(!isAndroid) alert("Error!");
+							alert("Error!");
 							console.log('Vehicle cannot bind to ' + VehicleHelper.connectTo);
 						}
 					}
