@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Copyright 2013 EPU-National Technical University of Athens
+ * Copyright 2012, 2013
  * Author: Paolo Vergori (ISMB), Michele Morello (ISMB), Christos Botsikas (NTUA)
  ******************************************************************************/
 
