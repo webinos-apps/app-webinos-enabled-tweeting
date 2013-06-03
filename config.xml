@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns       = "http://www.w3.org/ns/widgets"
         id          = "http://webinos.org/demo/webinos-enabled-twitting"
-        version     = "0.2"
+        version     = "0.3"
         height      = "800"
         width       = "480"
         viewmodes   = "fullscreen"> 
@@ -14,7 +14,7 @@
     Webinos Enabled Tweeting Widget
   </description>
 
-  <author href="http://developer.webinos.org/">The Webinos project (Paolo Vergori, Michele Morello, ISMB)</author>
+  <author href="http://developer.webinos.org/">The Webinos project (Paolo Vergori (ISMB), Michele Morello (ISMB), Christos Botsikas (NTUA), Michal T. Kozak (Antenna)</author>
 
   <content src="index.html"/>
   

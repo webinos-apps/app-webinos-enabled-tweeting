@@ -1,20 +1,20 @@
 @font-face {
     font-family: 'OpenSansRegular';
-    src: url('fonts/OpenSans-Regular-webfont.eot');
-    src: url('fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/OpenSans-Regular-webfont.woff') format('woff'),
-         url('fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
-         url('fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+    src: url('../fonts/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'OpenSansLight';
-    src: url('fonts/OpenSans-Light-webfont.eot');
-    src: url('fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/OpenSans-Light-webfont.woff') format('woff'),
-         url('fonts/OpenSans-Light-webfont.ttf') format('truetype'),
-         url('fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+    src: url('../fonts/OpenSans-Light-webfont.eot');
+    src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+         url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -80,7 +80,7 @@ label, .label {
 	background-repeat:no-repeat;
 }
 .radio input {
-	background-image:url(./img/radio.png);
+	background-image:url(../img/radio.png);
 	margin-top: 5px;
 	margin-right: 10px;
 }
@@ -88,7 +88,7 @@ label, .label {
 	background-position:left -38px
 }
 .checkbox input {
-	background-image:url(./img/checkbox.png);
+	background-image:url(../img/checkbox.png);
 	margin-top: 10px;
 }
 .checkbox input:checked {
@@ -109,7 +109,7 @@ textarea {
 .select {
 	-webkit-border-radius:5px;
 	border:1px solid #666;
-	background: url(./img/forms.png) no-repeat right -130px, -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(245, 245, 245, 1)), color-stop(100%, rgba(189, 189, 189, 1)));
+	background: url(../img/forms.png) no-repeat right -130px, -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(245, 245, 245, 1)), color-stop(100%, rgba(189, 189, 189, 1)));
 	height:40px;
 	text-indent:10px;
 	width:99%;
@@ -218,7 +218,7 @@ footer {
 	padding:10px;
 }
 .list a {
-	background: url(./img/list-arrow.png) no-repeat right center;
+	background: url(../img/list-arrow.png) no-repeat right center;
 	text-decoration:none;
 	color:#fff;
 	padding:15px 10px;
@@ -248,7 +248,7 @@ footer {
 	text-decoration:none;
 	padding-left:45px;
 	line-height:40px;
-	background-image:url(./img/icons-off.png);
+	background-image:url(../img/icons-off.png);
 	background-repeat:no-repeat;
 }
 .icon-list a.disabled {

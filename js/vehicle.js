@@ -1,3 +1,22 @@
+/*******************************************************************************
+ *  Code contributed to the webinos project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Copyright 2012, 2013
+ * Author: Paolo Vergori (ISMB), Michele Morello (ISMB), Christos Botsikas (NTUA)
+ ******************************************************************************/
+
 function INITvehicleGUI() {
 
 //	$("#btnVehicleInfo").bind('click', function() {
@@ -40,7 +59,7 @@ function postVehicleInfo(data) {
 			+ data.averageConsumption1 + " l/100kms"
 		);
 	} else
-		alert("Vehicle information won't be added. Too few characters left.");
+		if(!isAndroid) alert("Vehicle information won't be added. Too few characters left.");
 
 	var e = jQuery.Event("keydown");
 	e.which = 50;
@@ -82,7 +101,7 @@ VehicleHelper = {
 //								console.log(VehicleHelper.bindService);
 //
 //								service.get("tripcomputer", postVehicleInfo, function() {
-//											alert("Error!");
+//											if(!isAndroid) alert("Error!");
 //										});
 //							} else GUI.showError('Vehicle cannont bind to ' + VehicleHelper.connectTo);
 //						}
@@ -100,7 +119,7 @@ VehicleHelper = {
 			var boundService = VehicleHelper.serviceBindings[VehicleHelper.connectTo];
 			if (boundService!=null){
 				service.get("tripcomputer", postVehicleInfo, function() {
-					alert("Error!");
+					if(!isAndroid) alert("Error!");
 				});
 			}else{
 				service.bindService({
@@ -110,10 +129,10 @@ VehicleHelper = {
 							console.log('Vehicle bound to' + VehicleHelper.connectTo);
 							console.log(boundService);
 							service.get("tripcomputer", postVehicleInfo, function() {
-								alert("Error!");
+								if(!isAndroid) alert("Error!");
 							});
 						}else{
-							alert("Error!");
+							if(!isAndroid) alert("Error!");
 							console.log('Vehicle cannot bind to ' + VehicleHelper.connectTo);
 						}
 					}
