@@ -80,7 +80,7 @@ body {
 	width:260px;
 	height:93px;
 	margin:0 auto 50px auto;
-	background:url(./img/splash-w.png) no-repeat;
+	background:url(../img/splash-w.png) no-repeat;
 	font-size: 0;
 }
 .splash h1 span {
@@ -91,7 +91,7 @@ body {
 	line-height:100px;
 	padding-left:100px;
 	margin-bottom:1em;
-	background-image:url(./img/devices.png);
+	background-image:url(../img/devices.png);
 	background-repeat:no-repeat
 }
 h1.pc {
@@ -136,11 +136,11 @@ footer .checkbox label {
 	background-repeat: no-repeat;
 }
 .main li a:before {
-	background-image: url(./img/menuSmall.png);
+	background-image: url(../img/menuSmall.png);
 	/*background-size: 40px;*/
 }
 .main li a:hover:before {
-	background-image: url(./img/menuSmall-hover.png);
+	background-image: url(../img/menuSmall-hover.png);
 }
 #menucreate:before {background-position: 50% 0px;}
 #menutwitter:before {background-position: 50% -45px}
@@ -524,11 +524,11 @@ footer .checkbox label {
 	.main li a:before {
 	    height: 100px;
 	    z-index: -1;
-	    background-image: url(./img/menu-white.png);
+	    background-image: url(../img/menu-white.png);
 	    top: 10px;
 	}
 	.main li a:hover:before {
-		background-image: url(./img/menu-black.png);
+		background-image: url(../img/menu-black.png);
 		opacity: 0.6;
 	}
 	#menucreate:before {background-position: 50% 20px}
@@ -559,7 +559,7 @@ footer .checkbox label {
 
 	.main .logo {
 		display: block;
-		background: url(./img/splash130-w.png) 50% 50% no-repeat;
+		background: url(../img/splash130-w.png) 50% 50% no-repeat;
 		position: Absolute;
 		left: 10px;
 		top: 10px;

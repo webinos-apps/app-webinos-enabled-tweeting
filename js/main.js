@@ -1,3 +1,22 @@
+/*******************************************************************************
+ *  Code contributed to the webinos project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Copyright 2012, 2013
+ * Author: Paolo Vergori (ISMB), Michele Morello (ISMB), Christos Botsikas (NTUA)
+ ******************************************************************************/
+
 function InitGUI(){
 
 	setTimeout(checkDeletion, 3000);
@@ -14,7 +33,7 @@ function InitGUI(){
 			TwitterHelper.API.tweetMessage(
 				$('#tbox').find("textarea").val(),
 				function(){GUI.showSuccess('Tweet message successful'); $('#tbox').find("textarea").val('');},
-				function(){GUI.showError('Tweet message unsuccessful'); alert("error");}
+				function(){GUI.showError('Tweet message unsuccessful');}
 			);
 		}else{
 			// Tweet Message with media
@@ -69,16 +88,8 @@ TwitterHelper = {
 	init: function(message){
         //new way to generate sessionID
         sessionID = cleanSessionID(webinos.session.getPZPId());
-        console.log('----------SessionID:' + webinos.session.getPZPId());
+        console.log('-->SessionID:' + webinos.session.getPZPId());
         isAlreadyAuthenticated();
-
-		/*// Keep track of the local device address
-		webinos.ServiceDiscovery.findServices(new ServiceType('http://webinos.org/api/events'), {
-		  onFound: function (service) {
-			sessionID = service.myAppID.substring(0,service.myAppID.lastIndexOf('/'));
-			console.log('SessionID:' + sessionID);
-			isAlreadyAuthenticated();
-		  }});*/
 	},
 	API: {
 // 		getUsersInfo: function(ids, userHandlerCB){
@@ -142,7 +153,7 @@ TwitterHelper = {
 			var body = "";
 			var nl = "\r\n";
 
-			body += "--CbotRul3z"+nl;
+            body += "--webinosRul3z"+nl;
 			//media[] as described in API doesn't work!
 			//Using media_data instead based on http://stackoverflow.com/questions/7316776/twitters-statuses-update-with-media-on-ios-returns-500-error
 			body += 'Content-Disposition: form-data; name="media_data[]"; filename="'+imageName+'"'+nl;
@@ -151,12 +162,10 @@ TwitterHelper = {
 			body += ''+nl;
 			body += imageBytes+nl;
 
-			body += "--CbotRul3z"+nl;
 			body += 'Content-Disposition: form-data; name="status"'+nl;
 			body += ''+nl;
 			body += text+nl;
 
-			body += "--CbotRul3z--";
 			body += ''+nl;
 
 			TwitterHelper.oAuthService.post("http://upload.twitter.com/1/statuses/update_with_media.json", TwitterHelper.Secrets.access_token, TwitterHelper.Secrets.access_token_secret, body, "multipart/form-data; boundary=CbotRul3z", function(data){
@@ -265,34 +274,64 @@ function isAlreadyAuthenticated(){
 		      TwitterHelper.isReady = true;
 		      $('#status').css('display', 'block');
 		      $('#status_ko').css('display', 'none');
+              $("#authURL").css('display', 'none');
 		    }
 		    else{
 
 		      $.ajax({
-			url: "http://130.192.85.173:8888/authenticate",     //?sessionID="+sessionID,
-			type: 'POST',
-			data: JSON.stringify({"sessionID": sessionID}),
-			dataType: 'json',
-			//type: 'GET',
+                url: "http://130.192.85.173:8888/authenticate",     //?sessionID="+sessionID,
+                type: 'POST',
+                data: JSON.stringify({"sessionID": sessionID}),
+                dataType: 'json',
+                //type: 'GET',
 
-			success: function (data) {
-				if(data){
-					window.open(data.authURL);
-					console.log("devServer<authURL> " + data.authURL);
-				}
-				else{
-					console.log('Error: no URL recived');
-					alert("Server error!");
-				}
-			},
-			error: function (data) {
-				console.log('Authenticate Error: ' + data.responseText);
-			}
+                success: function (data) {
+                    if(data){                        
+                        console.log("devServer<authURL> " + data.authURL);                        
+                        if(isAndroid){                            
+// TODO: this does not work. Android WRT checks that localhost is in the link and chop off question marks...
+//                             console.log("window.open not suppot in android WRT. Opening link in a browser: " + data.authURL);                            
+//                             data.authURL += "&localhost";
+//                             webinos.discovery.findServices(new ServiceType('http://webinos.org/api/applauncher'), {
+//                                 onFound: function(service){
+//                                     if(service.serviceAddress === webinos.session.getPZPId()){
+//                                         service.bindService({
+//                                             onBind: function(service){                                                                                                                                                
+//                                                 service.launchApplication(function(){
+//                                                     console.log("SuccessCB: url opened");                                                   
+//                                                 },function(){console.log("ErrorCB: url failed to open");},                                                                                                                          
+//                                                 data.authURL);
+//                                             }
+//                                         });        
+//                                     }
+//                                     
+//                                 }
+//                             }); 
+                            $("#authMessage").html("Cannot open a window in android WRT. Please, open this link in a browser and authenticate: ");
+                            console.log("STO 0!!!!!!!!!!!!!!!");
+                            $("#authURL").attr('href', data.authURL);
+                            console.log("STO CAZZO!!!!!!!!!!!!!!!");
+                        }
+                        else{
+                            window.open(data.authURL);      
+                        }
+                    }
+                    else{
+                        console.log('Error: no URL recived');
+                        if(!isAndroid) alert("Server error!");
+                    }
+                },
+                error: function (data) {
+                    console.log('Authenticate Error: ' + data.responseText);
+                }
 		      });
 		    }
 		},
-		error: function (data) {
+        error: function (data) {
+            if(!isAndroid) alert("Error: failed to load resource 130.192.85.173. Server not available. Aborting");
 		    console.log('IsAlreadyAuthenticate Error: ' + JSON.stringify(data));
+            window.open('', '_self', '');
+            window.close();
 		}
 	});
   }
