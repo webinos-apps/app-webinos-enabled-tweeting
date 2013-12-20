@@ -8,7 +8,7 @@ Timeline = {
 		Timeline.localPzpAddress = message.from;
 		// Discover the oAuth service
 		setTimeout(function() { // Set a timeout to wait for the session initialization. 
-			webinos.ServiceDiscovery.findServices(new ServiceType('http://webinos.org/mwc/oauth'), 
+			webinos.discovery.findServices(new ServiceType('http://webinos.org/mwc/oauth'), 
 			{
                 onFound: function (service) {
                     // Keep only the service from the local device

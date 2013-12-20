@@ -140,7 +140,7 @@ function getScreenFromDevice(){
 //find service by name and link it
 var findServiceByName = function(serviceName){
     //TODO: check if serviceName is already found
-	webinos.ServiceDiscovery.findServices(new ServiceType('http://webinos.org/api/tv'), {
+	webinos.discovery.findServices(new ServiceType('http://webinos.org/api/tv'), {
 		onFound: function (service) {
 			if(service.serviceAddress.indexOf("@tv") == -1) return;
 			else $("ul#tvdevicelist > li.removeIfFound").hide();

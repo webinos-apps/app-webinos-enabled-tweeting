@@ -25,7 +25,7 @@ function usrsToEmailTo(addr) {
 
 var usrEmails = new Array();
 
-function InitGUI(){
+function InitContactsGUI(){
     //Hide the reporting divs
    $('.successbox').hide();
    $('.errormsgbox').hide();
@@ -153,7 +153,8 @@ function serviceBindSuccessCallback(service){
    console.log('CONTACTS API ' + service.api + ' bound.');
    GUI.showSuccess('Bind Service - successful');
    // Authenticate to the bound service
-   doAuthenticate();
+   //~ doAuthenticate();
+   ContactsHelper.retrieveContacts(null, print_contact_list);
 }
 
 // Bind and activate a GUI selected service
@@ -162,30 +163,6 @@ function bindSelectedService() {
    var serviceAddress = $('input[name="radiogroup"]:checked').attr('value');
    ContactsHelper.bindService(serviceAddress,serviceBindSuccessCallback,serviceBindFailCallback);
 }
-
-// Authenticate to the service
-function doAuthenticate() {
-   if (!ContactsHelper.authenticate('/home/paolo/abook.mab',successAuthenticationCallback, errorAuthenticationCallback)){
-      // Empty contacts
-      document.getElementById('html_contacts').innerHTML = "";
-      // Show error
-      GUI.showError("PROBLEM: Service unreachable");
-   }
-}
-// Authentication callback handler
-function successAuthenticationCallback() {
-   console.log('------------------Success_handle_auth : ');
-    GUI.showSuccess('Authentication - successful');
-    // Retrive the contacts from the service without specifying an address book.
-    ContactsHelper.retrieveContacts(null, print_contact_list);
-}
-
-function errorAuthenticationCallback() {
-    console.log('------------------Success_handle_auth : ');
-    GUI.showError('Authentication Failed!');
-}
-
-
 
 // Prints the contacts list
 function print_contact_list(list) {
@@ -210,14 +187,12 @@ function print_contact_list(list) {
             for (var j=0; j< list[i].ims.length; j++) {
                if ( list[i].ims[j].type === undefined ) {
                   //Pick the photo or add the default unknown picture.
-//                var photo = list[i].photos[0] ? list[i].photos[0].value : defaultPic;
                   $('ul#contactList').append('<li><img src=\"data:image\/png;base64,' +photo+'"\" width="40" height="40"><label for="' + list[i].id + '">' + displayName +'</label><input type="checkbox" id="' + list[i].ims[j].value + '" value="' + displayName +'" /></li>');
                   twitterFound = true;
                }
             }
          }
          if(!twitterFound) {
-//              var photo = list[i].photos[0] ? list[i].photos[0].value : defaultPic;
                 if (typeof list[i].emails !== "undefined" && typeof list[i].emails[0] !== "undefined")
                 {
                     $('ul#contactList').append('<li><img src=\"data:image\/png;base64,' +photo+'"\" width="40" height="40"><label for="' + list[i].id + '">' + displayName +'</label><input type="checkbox" id="' + list[i].emails[0].value + '" value="' + displayName +'" /></li>');
@@ -237,8 +212,8 @@ $(document).ready(function(){
    // Add an event handler when we locate a contact service
    ContactsHelper.onFoundService.push(onFoundService);
    // When the browser registers, find all contact services
-   webinos.session.addListener('registeredBrowser',ContactsHelper.locateContactServices);
+   ListenForRegistered(ContactsHelper.locateContactServices);
    // Initialize the GUI handlers
-   InitGUI();
+   InitContactsGUI();
 });
 

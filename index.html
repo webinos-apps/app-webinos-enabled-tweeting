@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="./css/twitter.css">
 <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=0,width=device-width" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.js"></script>
-<script type="text/javascript">    
+<script type="text/javascript">
     var ua = navigator.userAgent.toLowerCase();
     var isAndroid = ua.indexOf("android") > -1;
     var head = document.getElementsByTagName('head').item(0);
@@ -42,7 +42,7 @@
             script.src = "webinossocket.js";
             script.type = 'text/javascript';
             webinosJS.setAttribute("src", "/webinos.js");
-            head.appendChild(script);   
+            head.appendChild(script);
 
             script.onload = function () {
                 head.appendChild(webinosJS);
@@ -50,15 +50,16 @@
         }
         else {
             webinosJS.setAttribute("src", "/webinos.js");
-            head.appendChild(webinosJS);          
+            head.appendChild(webinosJS);
         }
     }
-    else { 
+    else {
         if(typeof(webinos) !== 'undefined')
             webinosLoaded();
         else {
+           console.log();
             if(!UrlExists(webinosJS.src))
-                webinosJS.setAttribute("src", "http://localhost:8080/client/webinos.js");                                    
+                webinosJS.setAttribute("src", "http://localhost:8080/client/webinos.js");
             head.appendChild(webinosJS);
         }
     }
@@ -75,61 +76,70 @@
         window.open('', '_self', '');
     }
 
-    function webinosLoaded() {
-        var script = document.createElement("script");
-        script.setAttribute("src", "js/checkWebinosVersion.js");
-        script.setAttribute("type","text/javascript");
-        head.appendChild(script);
-        script.onload = function(){
+    var registered = false;
+    function ListenForRegistered(listener) {
+       if(registered)
+          listener();
+       else
+          webinos.session.addListener("registeredBrowser", listener);
+    }
 
-            script = document.createElement("script");
+    function webinosLoaded() {
+        webinos.session.addListener("registeredBrowser", function(){registered=true;});
+        //~ var script = document.createElement("script");
+        //~ script.setAttribute("src", "js/checkWebinosVersion.js");
+        //~ script.setAttribute("type","text/javascript");
+        //~ head.appendChild(script);
+        //~ script.onload = function(){
+
+            var script = document.createElement("script");
             script.setAttribute("src", "js/jquery.MaxInput.js");
             script.setAttribute("type","text/javascript");
             head.appendChild(script);
             script.onload = function(){
-            
+
                 script = document.createElement("script");
                 script.setAttribute("src", "js/webinoscalls.js")
                 script.setAttribute("type","text/javascript");
                 head.appendChild(script);
                 script.onload = function(){
-                
+
                     script = document.createElement("script");
                     script.setAttribute("src", "js/contacts.js");
                     script.setAttribute("type","text/javascript");
                     head.appendChild(script);
                     script.onload = function(){
-                    
+
                         script = document.createElement("script");
                         script.setAttribute("src", "js/main.js");
                         script.setAttribute("type","text/javascript");
                         head.appendChild(script);
                         script.onload = function(){
-                        
+
                             script = document.createElement("script");
                             script.setAttribute("src", "js/remoteInput.js");
                             script.setAttribute("type","text/javascript");
                             head.appendChild(script);
                             script.onload = function(){
-                            
+
                                 script = document.createElement("script");
                                 script.setAttribute("src", "js/listenRemoteInput.js");
                                 script.setAttribute("type","text/javascript");
                                 head.appendChild(script);
                                 script.onload = function(){
-                                    
+
                                     script = document.createElement("script");
                                     script.setAttribute("src", "js/vehicle.js");
                                     script.setAttribute("type","text/javascript");
                                     head.appendChild(script);
                                     script.onload = function(){
-                                        
+
                                         script = document.createElement("script");
                                         script.setAttribute("src", "js/tvManager.js");
                                         script.setAttribute("type","text/javascript");
                                         head.appendChild(script);
                                         script.onload = function(){
-                                            
+
                                             script = document.createElement("script");
                                             script.setAttribute("src", "js/UIframework.js");
                                             script.setAttribute("type","text/javascript");
@@ -142,91 +152,91 @@
                     }
                 }
             }
-        }
+        //~ }
     }
 </script>
 </head>
 
 <body>
 <div id="globalmenu">
-	<ul class="main">
-		<li class="logo"></li>
-		<li class="menu-create"><a href="#menucreate" id="menucreate"><span>Create Tweet</span></a></li>
-		<li class="menu-twitter"><a href="#menutwitter" id="menutwitter"><span>Twitter</span></a></li>
-		<!--<li><a href="#menuauthorize" id="menuauthorize"><span>Authorize Devices</span></a></li>-->
-		<li class="menu-settings"><a href="#menusettings" id="menusettings"><span>Settings</span></a></li>
-	</ul>
+   <ul class="main">
+      <li class="logo"></li>
+      <li class="menu-create"><a href="#menucreate" id="menucreate"><span>Create Tweet</span></a></li>
+      <li class="menu-twitter"><a href="#menutwitter" id="menutwitter"><span>Twitter</span></a></li>
+      <!--<li><a href="#menuauthorize" id="menuauthorize"><span>Authorize Devices</span></a></li>-->
+      <li class="menu-settings"><a href="#menusettings" id="menusettings"><span>Settings</span></a></li>
+   </ul>
 </div>
 <div id="content">
-	<div id="pageNotFound">Content here</div>
+   <div id="pageNotFound">Content here</div>
 
-	<div id="splash" class="splash">
-	  <h1>Webinos Enabled</h1>
-	  <img src="./img/Status-user-online-icon.png" width="128" id="status"/>      
-	  <img src="./img/Status-user-busy-icon.png" width="128" id="status_ko"/>
+   <div id="splash" class="splash">
+     <h1>Webinos Enabled</h1>
+     <img src="./img/Status-user-online-icon.png" width="128" id="status"/>
+     <img src="./img/Status-user-busy-icon.png" width="128" id="status_ko"/>
       <div id="authMessage" style="color:#ffffff; font-size:280%; max-width:90%;"></div>
       <br>
       <a id="authURL" style="color:#ffffff; font-size:180%; max-width:100%;" target="_blank">Twitter authorization link</a>
-	</div>    
+   </div>
 
-	<div id="create">
-		<div id="tbox" class="jMax"></div>
-	</div>
+   <div id="create">
+      <div id="tbox" class="jMax"></div>
+   </div>
 
-	<div id="timelineContentPage">
-		<ul id="timeline" class="list"></ul>
-	</div>
+   <div id="timelineContentPage">
+      <ul id="timeline" class="list"></ul>
+   </div>
 
-	<div id="wetContactsTwitter">
-		<ul id="friendsList" class="list checkbox">
-		    <li class="list-header"><p>Twitter Contacts</p></li>
-		</ul>
+   <div id="wetContactsTwitter">
+      <ul id="friendsList" class="list checkbox">
+          <li class="list-header"><p>Twitter Contacts</p></li>
+      </ul>
     </div>
 
     <div id="wetContactsWebinos">
-    	<div id="devices" class="tabbed" style="font-weight: bold; text-align: center;">
-	        <ul id="devicelist" class="radio icon-list">
-	            <li class="list-header"><p>Look up for contacts! Pick one of these Webinos devices</p></li>
-	            <li class="removeIfFound"><label class="mobile">Sorry, no device with contacts was found...</label></li>
-	        </ul>
-	    </div>
-	    <br/>
-		<ul id="contactList" class="list checkbox">
-		    <li class="list-header"><p>Webinos Contacts</p></li>
-		</ul>
+      <div id="devices" class="tabbed" style="font-weight: bold; text-align: center;">
+           <ul id="devicelist" class="radio icon-list">
+               <li class="list-header"><p>Look up for contacts! Pick one of these Webinos devices</p></li>
+               <li class="removeIfFound"><label class="mobile">Sorry, no device with contacts was found...</label></li>
+           </ul>
+       </div>
+       <br/>
+      <ul id="contactList" class="list checkbox">
+          <li class="list-header"><p>Webinos Contacts</p></li>
+      </ul>
     </div>
 
     <div id="wetTvMedia">
-    	<div id="tvdevices" class="tabbed" style="font-weight: bold; text-align: center;">
-	        <ul id="tvdevicelist" class="radio icon-list">
-	            <li class="list-header"><p>Look up for TV! Pick one of these Webinos devices</p></li>
-	            <li class="removeIfFound"><label class="tv">Sorry, no Tv was found...</label></li>
-	        </ul>
-	    </div>
-	    <br/>
-    	<div id="mediapic"></div>
+      <div id="tvdevices" class="tabbed" style="font-weight: bold; text-align: center;">
+           <ul id="tvdevicelist" class="radio icon-list">
+               <li class="list-header"><p>Look up for TV! Pick one of these Webinos devices</p></li>
+               <li class="removeIfFound"><label class="tv">Sorry, no Tv was found...</label></li>
+           </ul>
+       </div>
+       <br/>
+      <div id="mediapic"></div>
     </div>
 
     <div id="wetVehicleInfo">
-    	<div id="vehicledevices" class="tabbed" style="font-weight: bold; text-align: center;">
-	        <ul id="vehicledevicelist" class="radio icon-list">
-	            <li class="list-header"><p>Look up for Vehicle! Pick one of these Webinos devices</p></li>
-	            <li class="removeIfFound"><label class="car">Sorry, no Vehicle was found...</label></li>
-	        </ul>
-	    </div>
+      <div id="vehicledevices" class="tabbed" style="font-weight: bold; text-align: center;">
+           <ul id="vehicledevicelist" class="radio icon-list">
+               <li class="list-header"><p>Look up for Vehicle! Pick one of these Webinos devices</p></li>
+               <li class="removeIfFound"><label class="car">Sorry, no Vehicle was found...</label></li>
+           </ul>
+       </div>
     </div>
 
     <div id="wetRemoteListen">
-    	<div class="tabbed" style="font-weight: bold; text-align: center;">
-	        <ul id="remoteDevicesList" class="radio icon-list">
-	            <li class="list-header"><p>Look up for Device! Pick one of these Webinos devices</p></li>
-	            <li class="removeIfFound"><label class="car">Sorry, no Device was found...</label></li>
-	        </ul>
-	    </div>
+      <div class="tabbed" style="font-weight: bold; text-align: center;">
+           <ul id="remoteDevicesList" class="radio icon-list">
+               <li class="list-header"><p>Look up for Device! Pick one of these Webinos devices</p></li>
+               <li class="removeIfFound"><label class="car">Sorry, no Device was found...</label></li>
+           </ul>
+       </div>
     </div>
 
     <div id="wetRemoteFind">
-    	List Connected PZPs, user shall select one to start remoting his twitter box.
+      List Connected PZPs, user shall select one to start remoting his twitter box.
     </div>
 
 </div>

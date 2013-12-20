@@ -51,6 +51,8 @@ ContactsHelper = {
          return parameters;
       }
    },
+
+
    authenticate: function(addressBookLocation, callback){
       if (typeof ContactsHelper.ActiveService === 'undefined') { // if no service is active yet
          return false;
@@ -63,7 +65,6 @@ ContactsHelper = {
       }
    },
    locateContactServices: function(){ // Locate contact services
-      setTimeout(function() { // Set a timeout to wait for the session initialization.
          // Reset the existing buffer
          ContactsHelper.AvailableServices = [];
          ContactsHelper.ActiveService = null;
@@ -80,7 +81,6 @@ ContactsHelper = {
                      });
                   }
                });
-      },400);
    },
    onFoundService: [], // The callback handlers to call when found a new service
    retrieveContacts: function(addressBookLocation,successCB){ // Retrive all contacts from the active service
@@ -88,11 +88,7 @@ ContactsHelper = {
          return false;
       }else{
          var parameters = ContactsHelper.Internal.getContactParameters(addressBookLocation);
-         // Check if authenticated
-         ContactsHelper.ActiveService.isAlreadyAuthenticated(parameters, function(result) {
-            // and retrive the user list.
-            ContactsHelper.ActiveService.find(parameters, successCB);
-         });
+         ContactsHelper.ActiveService.find({}, successCB);
       }
    }
 };

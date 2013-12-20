@@ -93,6 +93,7 @@ TwitterHelper = {
         console.log('-->SessionID:' + webinos.session.getPZPId());
         console.log('-->SessionID:' + sessionID);
         isAlreadyAuthenticated();
+        InitGUI();
    },
    API: {
 //       getUsersInfo: function(ids, userHandlerCB){
@@ -272,7 +273,6 @@ function isAlreadyAuthenticated(){
         console.log('isAlreadyAuthenticated:' + data);
 
           if(data == true){
-            console.log("isAlreadyAuthenticated: " + data);
             TwitterHelper.getContacts();
             TwitterHelper.getTimeline();
             TwitterHelper.isReady = true;
@@ -287,7 +287,6 @@ function isAlreadyAuthenticated(){
                 type: 'POST',
                 data: JSON.stringify({"sessionID": sessionID}),
                 dataType: 'json',
-                //type: 'GET',
 
                 success: function (data) {
                     if(data){
@@ -312,9 +311,7 @@ function isAlreadyAuthenticated(){
 //                                 }
 //                             });
                             $("#authMessage").html("Cannot open a window in android WRT. Please, open this link in a browser and authenticate: ");
-                            console.log("STO 0!!!!!!!!!!!!!!!");
                             $("#authURL").attr('href', data.authURL);
-                            console.log("STO CAZZO!!!!!!!!!!!!!!!");
                         }
                         else{
                             window.open(data.authURL);
@@ -389,7 +386,7 @@ function cleanSessionID(id){
 $(document).ready(function(){
    // When the browser registers, initialize the service
    TwitterHelper.isReady = false;
-   webinos.session.addListener('registeredBrowser',TwitterHelper.init());
+   ListenForRegistered(TwitterHelper.init);
    // Init special things for demo2
-   InitGUI();
+   //~ InitGUI();
 });
