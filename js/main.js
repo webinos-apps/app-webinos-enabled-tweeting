@@ -17,7 +17,7 @@
  * Author: Paolo Vergori (ISMB), Michele Morello (ISMB), Christos Botsikas (NTUA)
  ******************************************************************************/
 
-var serverAddress = "http://130.192.86.63:8888";
+var serverAddress = "http://130.192.85.173:8888";
 
 function InitGUI(){
 
